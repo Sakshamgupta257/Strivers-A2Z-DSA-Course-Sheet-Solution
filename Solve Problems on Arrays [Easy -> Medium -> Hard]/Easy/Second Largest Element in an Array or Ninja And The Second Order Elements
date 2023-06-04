@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+int secondLargest(vector<int> &arr , int n){
+    int sLargest = INT_MIN;
+    int largest = arr[0];
+    for(int i = 1 ; i < n ; i++){
+        if(arr[i] > largest){
+            sLargest = largest;
+            largest = arr[i];
+        }
+        else if(arr[i] < largest && arr[i] > sLargest){
+            sLargest = arr[i];
+        }
+    }
+    return sLargest;
+}
+int secodnSamllest(vector<int> &arr , int n){
+    int sSmallest =  INT_MAX;
+    int smallest = arr[0];
+    for(int i = 1 ; i < n; i++){
+        if(arr[i] < smallest){
+            sSmallest = smallest;
+            smallest = arr[i];
+        }
+        else if(arr[i] > smallest && arr[i] < sSmallest){
+            sSmallest = arr[i];
+        }
+    }
+    return sSmallest;
+}
+vector<int> getSecondOrderElements(int n, vector<int> a) {
+    int sLargest =secondLargest(a,n);
+    int sSmallest =secodnSamllest(a , n);
+    return {sLargest , sSmallest};
+}
