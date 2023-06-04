@@ -1,3 +1,4 @@
+//C++ -->
 int isSorted(int n, vector<int> a) {
     int ans=1;
     for(int i=1;i<n;i++){
@@ -10,4 +11,20 @@ int isSorted(int n, vector<int> a) {
         }
     }
     return ans;
+}
+//Java -->
+public class Solution {
+    public static int isSorted(int n, int []a) {
+        int ans = 1;
+        for(int i=1; i<n; i++){
+            if(a[i] >= a[i-1]){
+                ans = 1;
+            }
+            else{
+                ans=0;
+                break;
+            }
+        }
+        return ans;
+    }
 }
