@@ -1,0 +1,76 @@
+//C++ -->
+
+#include<bits/stdc++.h>
+vector < int > sortedArray(vector < int > a, vector < int > b) {
+    int n1=a.size();
+    int n2=b.size();
+    int i=0,j=0;
+    vector<int> Union;
+    while(i<n1 && j<n2){
+        if(a[i]<=b[j]){
+            if(Union.size() == 0 || Union.back()!=a[i]){
+                Union.push_back(a[i]);
+            }
+            i++;
+        }
+        else{
+            if(Union.size() == 0 || Union.back()!=b[j]){
+                Union.push_back(b[j]);
+            }
+            j++;
+        }
+    }
+    while(j<n2){
+        if(Union.size() == 0 || Union.back()!=b[j]){
+            Union.push_back(b[j]);
+        }
+        j++;
+    }
+    while(i<n1){
+        if(Union.size() == 0 || Union.back()!=a[i]){
+            Union.push_back(a[i]);
+        }
+        i++;
+    }
+    return Union;
+}
+
+//Java -->
+
+import java.util.*;
+public class Solution {
+    public static List< Integer > sortedArray(int []a, int []b) {
+      int i = 0, j = 0; 
+      int n = a.length;
+      int m = b.length;
+      ArrayList<Integer > Union = new ArrayList<>(); 
+      while (i < n && j < m) {
+      if (a[i] <= b[j]) 
+      {
+       if (Union.size() == 0 || Union.get(Union.size()-1) != a[i])
+         Union.add(a[i]);
+         i++;
+        }
+       else
+       {
+         if (Union.size() == 0 || Union.get(Union.size()-1) != b[j])
+          Union.add(b[j]);
+          j++;
+       }
+  }
+  while (i < n)
+  {
+    if (Union.get(Union.size()-1) != a[i])
+      Union.add(a[i]);
+      i++;
+  }
+  while (j < m) 
+  {
+    if (Union.get(Union.size()-1) != b[j])
+      Union.add(b[j]);
+      j++;
+  }
+  return Union;
+
+    }
+}
