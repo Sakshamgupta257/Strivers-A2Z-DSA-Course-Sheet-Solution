@@ -1,0 +1,71 @@
+//C++ -->
+
+#include <bits/stdc++.h> 
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N;
+    cin>>N;
+    int arr[N];
+    for(int i=0;i<N;i++){
+        cin>>arr[i];
+    }
+    int K;
+    cin>>K;
+    int temp[K];
+    //Store in Temp
+    for(int i=0;i<K;i++){
+        temp[i]=arr[i];
+    }
+    //Shifting
+    for(int i=K;i<N;i++){
+        arr[i-K]=arr[i];
+    }
+    //Placing back in Array from Temp
+    for(int i=N-K;i<N;i++){
+        arr[i]=temp[i-(N-K)];
+    }
+    //Print elemnts of Array
+    for(int i=0;i<N;i++){
+        cout<<arr[i]<<" ";
+    }
+    return 0;
+}
+
+//Java -->
+
+import java.util.* ;
+import java.io.*; 
+class Solution {
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int arr[] = new int[n];
+		for(int i=0; i<n; i++){
+            arr[i]=sc.nextInt();
+		}
+		int d = sc.nextInt();
+		
+		int temp[] = new int[d];
+		//store in temp
+		for(int i=0; i<d; i++){
+			temp[i] = arr[i];
+		}
+        //shifting
+		for(int i=d; i<n; i++){
+			arr[i-d] = arr[i]; 
+		}
+        //put temp in arr
+		for(int i=n-d; i<n; i++){
+			arr[i] = temp[i-(n-d)];
+		}
+		
+
+		//print the elements
+		for(int i=0; i<n; i++){
+			System.out.print(arr[i] + " ");
+		}
+	}
+}
