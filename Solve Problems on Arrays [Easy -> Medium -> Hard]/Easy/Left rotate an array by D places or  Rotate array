@@ -1,5 +1,7 @@
 //C++ -->
 
+1. Time complexity: O(N+K) || Space Complexity: O(K)
+
 #include <bits/stdc++.h> 
 #include <iostream>
 using namespace std;
@@ -32,8 +34,36 @@ int main() {
     }
     return 0;
 }
+2. Time complexity: O(2N) || Space Complexity: O(1)
+
+#include <bits/stdc++.h> 
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N;
+    cin>>N;
+    int arr[N];
+    for(int i=0;i<N;i++){
+        cin>>arr[i];
+    }
+    int K;
+    cin>>K;
+    int temp[K];
+    //Reverse
+    reverse(arr,arr+K);
+    reverse(arr+K,arr+N);
+    reverse(arr,arr+N);
+    //Print elemnts of Array
+    for(int i=0;i<N;i++){
+        cout<<arr[i]<<" ";
+    }
+    return 0;
+}
 
 //Java -->
+
+1. Time complexity: O(N+K) || Space Complexity: O(K)
 
 import java.util.* ;
 import java.io.*; 
@@ -69,3 +99,4 @@ class Solution {
 		}
 	}
 }
+
