@@ -1,0 +1,67 @@
+//C++ -->
+
+#include <bits/stdc++.h>
+string read(int n, vector<int> a, int target)
+{
+    int left=0,right=a.size()-1;
+    sort(a.begin(),a.end());
+    while(left<=right){
+        int sum=a[left] + a[right];
+      if (sum< target) {
+          left++;
+      } 
+      else if(sum>target){
+          right--;
+      }
+      else{ 
+          return "YES"; 
+        }
+    }
+    return "NO";
+}
+
+//Java -->
+
+import java.util.*;
+public class Solution {
+    public static String read(int n, int []book, int target){
+        // brute force
+        // for(int i=0; i<n; i++){
+        //     for(int j=i+1; j<n; j++){
+        //         if((book[i] + book[j]) == target){
+        //             return "YES";
+        //         }
+        //     }
+        // }
+        // return "NO";
+
+        //better
+        // HashMap<Integer, Integer> mpp = new HashMap<>();
+        // for (int i = 0; i < n; i++) {
+        //     int num = book[i];
+        //     int moreNeeded = target - num;
+        //     if (mpp.containsKey(moreNeeded)) {
+        //         return "YES";
+        //     }
+
+        //     mpp.put(book[i], i);
+        // }
+        // return "NO";
+        
+        //optimal
+        int left = 0, right=n-1;
+        Arrays.sort(book);
+        while(left <= right){
+            if((book[left] + book[right]) == target){
+                return "YES";
+            }
+            else if((book[left] + book[right]) < target){
+                left++;
+            }
+            else{
+                right--;
+            }
+        }
+        return "NO";
+    }
+}
