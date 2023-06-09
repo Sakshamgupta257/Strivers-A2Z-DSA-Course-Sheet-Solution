@@ -1,0 +1,47 @@
+//C++ -->
+
+#include <bits/stdc++.h> 
+void sortArray(vector<int>& a, int n)
+{
+    int low=0,mid=0,high=a.size()-1;
+    while(mid<=high){
+        if(a[mid]==0){
+            swap(a[mid],a[low]);
+            low++;
+            mid++;
+        }
+        else if(a[mid]==1){
+            mid++;
+        }
+        else if(a[mid]==2){
+            swap(a[mid],a[high]);
+            high--;
+        }
+    }
+}
+
+//Java -->
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static void sortArray(ArrayList<Integer> arr, int n) {
+
+    int low=0,mid=0,high=arr.size()-1;
+
+    while(mid <= high){
+        if(arr.get(mid)==0){
+            Collections.swap(arr,mid,low);
+            low++;
+            mid++;
+        }
+        else if(arr.get(mid)==1){
+            mid++;
+        }
+        else if(arr.get(mid)==2){
+            Collections.swap(arr,mid,high);
+            high--;
+        }
+    }
+    }
+}
