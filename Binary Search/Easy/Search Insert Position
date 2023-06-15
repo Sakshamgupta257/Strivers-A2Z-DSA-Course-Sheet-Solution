@@ -1,0 +1,23 @@
+//C++ -->
+
+int searchInsert(vector<int>& arr, int m)
+{
+	auto upper = upper_bound(arr.begin(),arr.end(),m);
+    int idx = distance(arr.begin(), upper);
+    if(arr[idx-1]==m) return idx-1;
+    return idx;
+}
+
+//Java -->
+
+import java.util.Arrays;
+public class Solution {
+    public static int searchInsert(int [] arr, int m){
+        int index=Arrays.binarySearch(arr, m);
+        while(index<0)
+        {
+            index=-(index+1);
+        }
+       return index;
+    }
+}
