@@ -1,0 +1,47 @@
+//C++ -->
+
+int findMin(vector<int>& nums)
+{
+	int left = 0, right = nums.size()-1, minVal = INT_MAX;
+
+  while (left <= right) {
+    if (nums[left] < nums[right]) {
+      minVal = min(minVal, nums[left]);
+      break;
+    }
+    int mid = left + (right - left) / 2;
+
+    if (nums[left] <= nums[mid]) {
+      minVal = min(minVal, nums[left]);
+      left = mid + 1;
+    } else {
+      minVal = min(minVal, nums[mid]);
+      right = mid - 1;
+    }
+  }
+  return minVal;
+}
+
+//Java -->
+
+public class Solution {
+    public static int findMin(int []arr) {
+        int n = arr.length;
+        int low = 0, high = n-1;
+        int ans = Integer.MAX_VALUE;
+
+        while(low <= high){
+            int mid = (low + high)/2;
+
+            if(arr[low] <= arr[mid]){
+                ans = Math.min(ans , arr[low]);
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+                ans = Math.min(ans , arr[mid]);
+            }
+        }
+        return ans;
+    }
+}
