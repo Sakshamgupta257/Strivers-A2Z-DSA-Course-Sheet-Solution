@@ -1,0 +1,33 @@
+//C++ -->
+
+#include<bits/stdc++.h>
+int func(vector<int> v, int h){
+    int totalhr=0;
+    for(int &x: v){
+        totalhr+=x/h;
+        if(x%h!=0){
+            totalhr++;
+        }
+    }
+    return totalhr;
+}
+int minimumRateToEatBananas(vector<int> v, int h) {
+    int low=1;
+    int ans=INT_MAX;
+    int high=*max_element (v.begin(),v.end());
+    while(low<=high){
+        int mid=(low+high)/2;
+        int totalhr=func(v,mid);
+        if(totalhr<=h){
+            ans=mid;
+            high=mid-1;
+        }
+        else{
+            low=mid+1;
+        }
+    }
+    return ans;
+}
+
+//Java -->
+
