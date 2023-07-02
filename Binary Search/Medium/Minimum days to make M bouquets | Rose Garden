@@ -1,0 +1,42 @@
+//C++ -->
+
+#include<bits/stdc++.h>
+bool ispossible(vector<int> arr, int k, int m, int day){
+	int cnt=0;
+	int nob=0;
+	for(int i=0;i<arr.size();i++){
+		if(arr[i]<=day){
+			cnt++;
+		}else{
+			nob+=(cnt/k);
+			cnt=0;
+		}
+	}
+	nob+=(cnt/k);
+	if(nob>=m){
+		return true;
+	}
+	return false;
+}
+int roseGarden(vector<int> arr, int k, int m)
+{
+	if(arr.size()<k*m){
+		return -1;
+	}
+	int ans=0;
+	int min1=*min_element(arr.begin(), arr.end());
+	int max1=*max_element(arr.begin(), arr.end());
+	while(min1<=max1){
+	    int mid=(min1+max1)/2;
+	    if(ispossible(arr,k,m,mid)){
+			max1=mid-1;
+			ans=mid;
+        } else {
+            min1= mid + 1;
+        }
+    }
+	return ans;
+}
+
+//Java -->
+
