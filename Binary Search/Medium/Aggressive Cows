@@ -1,0 +1,47 @@
+//C++ -->
+
+bool ispossible(vector<int> &stalls, int n,int k,int mid){
+    int countCow=1;
+    int lastpos=stalls[0];
+    for(int i=0;i<n;i++){
+        if(stalls[i]-lastpos>=mid){
+            countCow++;
+            if(countCow==k){
+                return true;
+            }
+            lastpos=stalls[i];
+        }
+    }
+    return false;
+
+}
+int aggressiveCows(vector<int> &stalls, int k)
+
+{
+    sort(stalls.begin(),stalls.end());
+    int n=stalls.size();
+    int s=0;
+    int e=0;
+    int max1=0;
+    int min1=1000000;
+    for(int i=0;i<n;i++){
+       max1=max(max1,stalls[i]);
+    }
+    e=max1;
+    int mid=s+(e-s)/2;
+    int ans=-1;
+    while(s<=e){
+        if(ispossible(stalls,n,k,mid)){
+            ans=mid;
+            s=mid+1;
+        }
+        else{
+            e=mid-1;
+        }
+        mid=s+(e-s)/2;
+    }
+    return ans;
+}
+
+//Java -->
+
