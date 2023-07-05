@@ -1,0 +1,110 @@
+//C++ -->
+
+bool isPossible(vector<int> &arr, int k, int l){
+	int count = 1;
+    int sum = 0;
+	for(int i=0;i<arr.size();i++){
+		if(sum+arr[i]<=l){
+			sum+=arr[i];
+		}else{
+			count++;
+			if((count>k) || (arr[i]>l)){
+				return false;
+			}
+			sum=arr[i];
+		}
+	}
+	return true;
+}
+int splitArray(vector<int> &arr, int k) {
+	// Range [max(arr),sum(arr)]
+	// // --> linear
+	int l=*max_element (arr.begin(), arr.end());
+	int sum=0;
+	for (int i = 0; i < arr.size(); i++) {
+        sum += arr[i];
+    }
+	// int ans=0;
+	// int limit=sum;
+	// for(int i=l;i<=limit;l++){
+	// 	if(isPossible(arr,k,i)){
+	// 		ans=i;
+	// 	}
+	// }
+	// return ans; <--//
+
+	// Binary --> 
+	int left = l;
+    int right = sum;  
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            if (isPossible(arr, k, mid)) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+    return left;
+}
+
+//Java -->
+
+import java.util.ArrayList;
+import java.util.*;
+
+public class Solution {
+    public static boolean isPossible(ArrayList<Integer> arr, int k, int low){
+        int count=1;
+        int sum=0;
+
+        for(int i=0; i<arr.size(); i++){
+            if((sum + arr.get(i)) <= low){
+                sum += arr.get(i);
+            }
+            else{
+                count++;
+                if((count > k) || (arr.get(i) >low)){
+                    return false;
+                }
+                sum = arr.get(i);
+            }
+        }
+        return true;
+    }
+    public static int splitArray(ArrayList<Integer> arr, int k) {
+        // Range [max(arr)  -->  sum(arr)]
+        //linear search
+        int n=arr.size();
+        int low = Collections.max(arr);
+        int sum=0;
+        for (int i = 0; i < n; i++) {
+            sum += arr.get(i);
+        }
+
+        // int ans=0;
+        // int high=sum;
+        
+        // for(int i=low; i<=high; i++){
+        //     if(isPossible(arr,k,i)){
+        //        ans = i;
+        //     }
+        // }
+        // return ans;
+        int s=low;
+        int e=sum;
+        
+        while(s<e){
+            int mid=s+(e-s)/2;
+
+            if(isPossible(arr, k, mid)){
+                e=mid;
+            }
+            else{
+                s=mid+1;
+            }
+        }
+        return s;
+    }
+}
