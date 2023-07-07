@@ -1,0 +1,22 @@
+//C++ -->
+
+#include<bits/stdc++.h>
+
+int rowWithMax1s(vector<vector<int>> &matrix, int n, int m) {
+    int ans=-1;
+    int row=0;
+    int col=m-1;
+    while((row>=0&&row<n)&&(col>=0&&col<m)){
+        if(matrix[row][col]==1){
+            ans=row;
+            col--;
+        }
+        else{
+            row++;
+        }
+    }
+    return ans;
+}
+
+//Java -->
+
