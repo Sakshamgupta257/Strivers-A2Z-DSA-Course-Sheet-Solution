@@ -1,0 +1,94 @@
+//C++ -->
+
+/*
+ * Definition for doubly-linked list.
+ * class Node
+ * {
+ * public:
+ *    int data;
+ *    Node *next, *prev;
+ *    Node() : data(0), next(nullptr), prev(nullptr) {}
+ *    Node(int x) : data(x), next(nullptr), prev(nullptr) {}
+ *    Node(int x, Node *next, Node *prev) : data(x), next(next), prev(prev) {}
+ * };
+ */
+
+Node* constructDLL(vector<int>& arr) {
+    Node* head = nullptr;
+    Node* prev = nullptr;
+    
+    for (int i = 0; i < arr.size(); i++) {
+        Node* newNode = new Node(arr[i]);
+        
+        if (head == nullptr) {
+            head = newNode;
+        } else {
+            prev->next = newNode;
+            newNode->prev = prev;
+        }
+        
+        prev = newNode;
+    }
+    
+    return head;
+}
+
+//Java -->
+
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+     public Node prev;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+         this.prev = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+         this.prev = null;
+     }
+
+     Node(int data, Node next, Node prev)
+     {
+         this.data = data;
+         this.next = next;
+         this.prev = prev;
+     }
+ };
+
+ *****************************************************************/
+
+public class Solution
+{
+    public static Node constructDLL(int []arr) {
+        // Write your code here
+        
+        
+        Node head=null;
+        Node prev = null;
+
+        for(int i=0; i<arr.length; i++){
+            Node newNode = new Node(arr[i]);
+
+            if(head == null){
+                head = newNode;
+            } 
+            else{
+                prev.next = newNode;
+                newNode.prev=prev;
+            }
+            prev=newNode;
+        }
+        return head;
+    }
+}
