@@ -50,3 +50,56 @@ int lengthOfLoop(Node *head) {
 
 //Java -->
 
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ };
+
+ *****************************************************************/
+import java.util.*;
+public class Solution
+{
+    public static int lengthOfLoop(Node head) {
+       Node slow = head;
+       Node fast = head;
+
+       while(fast != null && fast.next != null) {
+          slow = slow.next;
+          fast = fast.next.next;
+    
+          if(slow == fast) {
+          int length = 1;
+          slow = slow.next;
+          while(slow != fast) {
+             length++;
+             slow = slow.next;
+            }
+        return length;
+        } 
+    }
+
+    return 0;
+    }
+}
