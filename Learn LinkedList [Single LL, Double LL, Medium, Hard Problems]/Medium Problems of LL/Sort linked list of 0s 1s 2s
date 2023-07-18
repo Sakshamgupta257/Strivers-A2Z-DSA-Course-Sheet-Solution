@@ -91,3 +91,65 @@ Node* sortList(Node *head) {
 
 //Java -->
 
+public static Node sortList(Node head) {
+        if (head == null || head.next == null) {
+            return head; // If the list is empty or has only one node, it's already sorted.
+        }
+
+        Node zeroHead = null; // Pointer to the head of the list with 0s
+        Node zeroTail = null; // Pointer to the tail of the list with 0s
+        Node oneHead = null;  // Pointer to the head of the list with 1s
+        Node oneTail = null;  // Pointer to the tail of the list with 1s
+        Node twoHead = null;  // Pointer to the head of the list with 2s
+        Node twoTail = null;  // Pointer to the tail of the list with 2s
+
+        Node curr = head;
+        while (curr != null) {
+            if (curr.data == 0) {
+                if (zeroHead == null) {
+                    zeroHead = zeroTail = curr;
+                } else {
+                    zeroTail.next = curr;
+                    zeroTail = curr;
+                }
+            } else if (curr.data == 1) {
+                if (oneHead == null) {
+                    oneHead = oneTail = curr;
+                } else {
+                    oneTail.next = curr;
+                    oneTail = curr;
+                }
+            } else { // curr.data == 2
+                if (twoHead == null) {
+                    twoHead = twoTail = curr;
+                } else {
+                    twoTail.next = curr;
+                    twoTail = curr;
+                }
+            }
+
+            curr = curr.next;
+        }
+
+        // Merge the three lists
+        if (zeroTail != null) {
+            zeroTail.next = oneHead != null ? oneHead : twoHead;
+        }
+        if (oneTail != null) {
+            oneTail.next = twoHead;
+        }
+
+        // Set the head of the sorted list
+        head = zeroHead != null ? zeroHead : (oneHead != null ? oneHead : twoHead);
+
+        // Set the tail's next to null to terminate the list
+        if (twoTail != null) {
+            twoTail.next = null;
+        } else if (oneTail != null) {
+            oneTail.next = null;
+        } else if (zeroTail != null) {
+            zeroTail.next = null;
+        }
+
+        return head;
+    }
