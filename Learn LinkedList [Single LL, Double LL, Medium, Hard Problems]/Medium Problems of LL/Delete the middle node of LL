@@ -54,3 +54,58 @@ Node* deleteMiddle(Node* head){
 
 //Java -->
 
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ };
+
+ *****************************************************************/
+
+public class Solution {
+    public static Node findMiddle(Node head)
+    {
+        Node slow=head, fast = head;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    public static Node deleteMiddle(Node head) {
+        
+        if(head == null || head.next == null)  return null;
+        Node mid = findMiddle(head);
+
+        Node temp = head;
+        
+        while(temp.next != mid){
+            temp = temp.next;
+        }
+        temp.next = mid.next;
+
+        return head;
+    }
+}
