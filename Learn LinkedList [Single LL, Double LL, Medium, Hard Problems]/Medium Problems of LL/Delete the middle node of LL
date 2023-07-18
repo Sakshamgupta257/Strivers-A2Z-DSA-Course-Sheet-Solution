@@ -45,7 +45,6 @@ Node* deleteMiddle(Node* head){
     }
     Node* mid=findMiddle(head);
     Node* temp=head;
-    Node* prev=head;
     while(temp->next!=mid){
         temp=temp->next;
     }
