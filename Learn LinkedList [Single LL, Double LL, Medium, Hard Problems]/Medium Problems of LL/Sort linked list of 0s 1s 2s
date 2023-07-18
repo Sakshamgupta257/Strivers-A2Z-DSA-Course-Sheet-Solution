@@ -1,0 +1,93 @@
+//C++ -->
+
+/*
+Following is the class structure of the Node class:
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node()
+    {
+        this->data = 0;
+        next = NULL;
+    }
+    Node(int data)
+    {
+        this->data = data; 
+        this->next = NULL;
+    }
+    Node(int data, Node* next)
+    {
+        this->data = data;
+        this->next = next;
+    }
+};
+*/
+
+Node* sortList(Node *head) {
+    if (!head || !head->next) {
+        return head; // If the list is empty or has only one node, it's already sorted.
+    }
+
+    Node* zeroHead = nullptr;  // Pointer to the head of the list with 0s
+    Node* zeroTail = nullptr;  // Pointer to the tail of the list with 0s
+    Node* oneHead = nullptr;   // Pointer to the head of the list with 1s
+    Node* oneTail = nullptr;   // Pointer to the tail of the list with 1s
+    Node* twoHead = nullptr;   // Pointer to the head of the list with 2s
+    Node* twoTail = nullptr;   // Pointer to the tail of the list with 2s
+
+    Node* curr = head;
+    while (curr) {
+        if (curr->data == 0) {
+            if (!zeroHead) {
+                zeroHead = zeroTail = curr;
+            } else {
+                zeroTail->next = curr;
+                zeroTail = curr;
+            }
+        } else if (curr->data == 1) {
+            if (!oneHead) {
+                oneHead = oneTail = curr;
+            } else {
+                oneTail->next = curr;
+                oneTail = curr;
+            }
+        } else { // curr->data == 2
+            if (!twoHead) {
+                twoHead = twoTail = curr;
+            } else {
+                twoTail->next = curr;
+                twoTail = curr;
+            }
+        }
+
+        curr = curr->next;
+    }
+
+    // Merge the three lists
+    if (zeroTail) {
+        zeroTail->next = oneHead ? oneHead : twoHead;
+    }
+    if (oneTail) {
+        oneTail->next = twoHead;
+    }
+
+    // Set the head of the sorted list
+    head = zeroHead ? zeroHead : (oneHead ? oneHead : twoHead);
+
+    // Set the tail's next to nullptr to terminate the list
+    if (twoTail) {
+        twoTail->next = nullptr;
+    } else if (oneTail) {
+        oneTail->next = nullptr;
+    } else if (zeroTail) {
+        zeroTail->next = nullptr;
+    }
+
+    return head;
+}
+
+//Java -->
+
