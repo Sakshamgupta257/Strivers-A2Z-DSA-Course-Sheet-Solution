@@ -64,3 +64,79 @@ bool isPalindrome(Node *head)
 
 //Java -->
 
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+    
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+    
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+    
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ }
+
+ *****************************************************************/
+
+public class Solution {
+    public static Node reverseLinkedList(Node head)
+    {
+        // Write your code here.
+        Node prev = null;
+        Node curr = head;
+        Node next;
+
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+
+            prev = curr;
+            curr = next;
+        }
+
+        head = prev;
+        return head;
+    }
+    public static boolean isPalindrome(Node head) {
+        // write your code here
+        if(head == null || head.next==null){
+            return true;
+        }  
+
+        Node slow = head;
+        Node fast = head;
+//find middle 
+        while(fast.next != null && fast.next.next !=null){
+            slow = slow.next;
+            fast=fast.next.next;
+        }
+//reverse right half
+        slow.next=reverseLinkedList(slow.next);
+//move slow to right half
+        slow=slow.next;
+//check for left and right half equal or not
+        while(slow != null){
+            if(head.data != slow.data){
+                return false;
+            }
+            head=head.next;
+            slow=slow.next;
+        }
+        return true;
+    }
+}
