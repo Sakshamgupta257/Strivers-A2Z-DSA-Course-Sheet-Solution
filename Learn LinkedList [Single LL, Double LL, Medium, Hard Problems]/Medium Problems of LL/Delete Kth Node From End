@@ -63,3 +63,84 @@ Node* removeKthNode(Node* head, int k)
 
 //Java -->
 
+1.Reverse the original ll.
+2.Delete the kth node.
+3.Reverse the newLL to display the original ll.
+
+
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+     public Node prev;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+         this.prev = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+         this.prev = null;
+     }
+
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+         this.prev = next;
+     }
+ };
+
+ *****************************************************************/
+
+public class Solution
+{
+    public static Node reverseLinkedList(Node head)
+    {
+        // Write your code here.
+        Node prev = null;
+        Node curr = head;
+        Node next;
+
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+
+            prev = curr;
+            curr = next;
+        }
+
+        head = prev;
+        return head;
+    }
+    public static Node removeKthNode(Node head, int K)
+    {
+        Node newhead = reverseLinkedList(head);
+        Node temp = newhead;
+        Node prev = newhead;
+
+        int count = 1;
+        if(K==1){
+            newhead = temp.next;
+            return reverseLinkedList(newhead);
+        }
+        while(count != K){
+            if(temp != newhead){
+                prev=prev.next;
+            }
+            temp = temp.next;
+            count++;
+        }
+        prev.next = temp.next;
+
+        return reverseLinkedList(newhead);
+    }
+}
