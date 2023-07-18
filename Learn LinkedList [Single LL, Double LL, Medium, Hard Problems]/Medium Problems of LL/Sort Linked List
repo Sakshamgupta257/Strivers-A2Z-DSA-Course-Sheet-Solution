@@ -72,3 +72,75 @@ Node* sortList(Node* head) {
 
 //Java -->
 
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ }
+
+ *****************************************************************/
+
+public class Solution {
+
+    public static Node merge(Node left, Node right) {
+        if (left == null) return right;
+        if (right == null) return left;
+
+        Node result;
+        if (left.data <= right.data) {
+            result = left;
+            result.next = merge(left.next, right);
+        } else {
+            result = right;
+            result.next = merge(left, right.next);
+        }
+        return result;
+    }
+
+    public static Node mergeSort(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Find the middle of the linked list
+        Node slow = head;
+        Node fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        Node middle = slow.next;
+        slow.next = null;
+
+        // Recursively sort both halves
+        Node left = mergeSort(head);
+        Node right = mergeSort(middle);
+
+        // Merge the sorted halves
+        return merge(left, right);
+    }
+
+    public static Node sortList(Node head) {
+        return mergeSort(head);
+    }
+}
