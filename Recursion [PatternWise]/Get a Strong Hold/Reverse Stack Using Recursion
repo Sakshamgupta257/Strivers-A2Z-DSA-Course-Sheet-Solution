@@ -1,0 +1,57 @@
+//C++ -->
+
+void pushAtBottom(stack<int>& s, int data) {
+    if (s.empty()) {
+        s.push(data);
+        return;
+    }
+
+    int top = s.top();
+    s.pop();
+    pushAtBottom(s, data);
+    s.push(top);
+}
+
+void reverseStack(stack<int>& s) {
+    if (s.empty()) {
+        return;
+    }
+
+    int top = s.top();
+    s.pop();
+    reverseStack(s);
+    pushAtBottom(s, top);
+}
+
+//Java -->
+
+import java.util.Stack;
+
+public class Solution {
+    
+	public static void pushAtBottom(Stack<Integer> s, int data ){
+        if(s.isEmpty()){
+            s.push(data);
+            return;
+        }
+       
+        //remove all elements
+        int top = s.pop();
+        pushAtBottom(s, data);
+        
+        //push elements
+        s.push(top);
+    }
+	public static void reverseStack(Stack<Integer> s) {
+		if(s.isEmpty()){
+            return;
+        }
+
+        //remove all elements
+        int top = s.pop();
+        reverseStack(s);
+        
+        //push at bottom
+        pushAtBottom(s, top);	
+	}
+}
