@@ -1,0 +1,50 @@
+//C++ -->
+
+/**
+ * Definition for singly-linked list.
+ * class Node {
+ * public:
+ *     int data;
+ *     Node *next;
+ *     Node() : data(0), next(nullptr) {}
+ *     Node(int x) : data(x), next(nullptr) {}
+ *     Node(int x, Node *next) : data(x), next(next) {}
+ * };
+ */
+int lengthOfLinkedList(Node* head) {
+    int length = 0;
+    while(head != NULL) {
+        ++length;
+        head = head->next;
+    }
+    return length;
+}
+Node* kReverse(Node* head, int k) {
+    if(head == NULL||head->next == NULL) return head;
+    
+    int length = lengthOfLinkedList(head);
+    
+    Node* dummyHead = new Node(0);
+    dummyHead->next = head;
+    
+    Node* pre = dummyHead;
+    Node* cur;
+    Node* nex;
+    
+    while(length >= k) {
+        cur = pre->next;
+        nex = cur->next;
+        for(int i=1;i<k;i++) {
+            cur->next = nex->next;
+            nex->next = pre->next;
+            pre->next = nex;
+            nex = cur->next;
+        }
+        pre = cur;
+        length -= k;
+    }
+    return dummyHead->next;
+}
+
+//Java -->
+
