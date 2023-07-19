@@ -1,0 +1,147 @@
+//C++ -->
+
+/**
+ * Definition of doubly linked list:
+ *
+ * class Node {
+ * public:
+ *      int data;
+ *      Node *prev;
+ *      Node *next;
+ *      Node() {
+ *          this->data = 0;
+ *          this->prev = NULL;
+ *          this->next = NULL;
+ *      }
+ *      Node(int data) {
+ *          this->data = data;
+ *          this->prev = NULL;
+ *          this->next = NULL;
+ *      }
+ *      Node (int data, Node *next, Node *prev) {
+ *          this->data = data;
+ *          this->prev = prev;
+ *          this->next = next;
+ *      }
+ * };
+ *
+ *************************************************************************/
+
+Node * deleteAllOccurrences(Node* head, int k) {
+    
+Node* curr = head;
+
+while(curr){
+
+ 
+
+if(curr->data == k){
+
+// first node
+
+if(curr->next==NULL && curr->prev==NULL) return NULL;
+
+if(curr->prev == NULL){
+
+curr->next->prev =NULL;
+
+head = curr->next;
+
+}
+
+// last node
+
+else if(curr->next==NULL){
+
+curr->prev->next = NULL;
+
+}
+
+else{
+
+curr->prev->next = curr->next;
+
+curr->next->prev = curr->prev;
+
+}
+
+}
+
+curr = curr->next;
+
+}
+
+return head;
+}
+
+//Java -->
+
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+     public Node prev;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+         this.prev = null;
+     }
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+         this.prev = null;
+     }
+     Node(int data, Node next, Node prev)
+     {
+         this.data = data;
+         this.next = next;
+         this.prev = prev;
+     }
+ }
+
+ *****************************************************************/
+
+public class Solution {
+    public static Node deleteAllOccurrences(Node head, int k) {
+        if(head == null){
+            return head;
+        }
+
+        Node curr = head;
+        Node prev = null;
+        Node next;
+
+        
+        while(curr != null){
+            if(curr.data == k){
+                next = curr.next;
+
+                if(prev != null){
+                    prev.next = next;
+                }
+                
+                if(next != null){
+                    next.prev = prev;
+                }
+
+                if(curr == head){ // agar head ko hi delete krna h to usko aage badha do
+                    head = next;
+                }
+
+                curr = null;
+                curr = next;
+            }
+            else{
+                prev = curr;
+                curr = curr.next;
+            }
+        }
+        return head;
+    }
+}
