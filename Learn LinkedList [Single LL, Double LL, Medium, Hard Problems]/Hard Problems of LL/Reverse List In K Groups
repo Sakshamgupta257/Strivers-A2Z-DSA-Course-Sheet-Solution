@@ -46,5 +46,76 @@ Node* kReverse(Node* head, int k) {
     return dummyHead->next;
 }
 
+***********************************************************************************************
 //Java -->
 
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ };
+
+ *****************************************************************/
+
+public class Solution {
+    public static int length(Node head){
+        
+        Node temp = head;
+        int count = 0;
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+        return count;
+
+    }
+    public static Node kReverse(Node head, int k) {
+        
+        if(head == null || head.next == null)  return head;
+
+        int len = length(head);
+
+        Node dummy = new Node(0);
+        dummy.next = head;
+
+        Node pre = dummy;
+        Node curr;
+        Node nex;
+
+        while(len >= k){
+            curr = pre.next;
+            nex = curr.next;
+
+            for(int i=1; i<k; i++){
+                curr.next = nex.next;
+                nex.next = pre.next;
+                pre.next = nex;
+                nex = curr.next;
+            }
+            pre = curr;
+            len = len-k;
+        }
+        return dummy.next;
+    }
+}
