@@ -1,0 +1,55 @@
+//C++ -->
+
+#include<bits/stdc++.h>
+/**
+ * Definition of doubly linked list:
+ * class Node {
+ * public:
+ *      int data;
+ *      Node *prev;
+ *      Node *next;
+ *      Node() {
+ *          this->data = 0;
+ *          this->prev = NULL;
+ *          this->next = NULL;
+ *      }
+ *      Node(int data) {
+ *          this->data = data;
+ *          this->prev = NULL;
+ *          this->next = NULL;
+ *      }
+ *      Node (int data, Node *next, Node *prev) {
+ *          this -> data = data;
+ *          this -> prev = prev;
+ *          this -> next = next;
+ *      }
+ * };
+ *
+ *************************************************************************/
+
+vector<pair<int, int>> findPairs(Node* head, int k)
+{
+    vector<pair<int, int>> pairs;
+    unordered_map<int, Node*> nodeMap; // Map to store each node's value and address
+
+    Node* current = head;
+    while (current != nullptr) {
+        // Check if the complement (k - current->data) exists in the map
+        int complement = k - current->data;
+        if (nodeMap.find(complement) != nodeMap.end()) {
+            // Found a pair, add it to the result
+            pairs.push_back(make_pair(current->data, complement));
+        }
+
+        // Add the current node to the map
+        nodeMap[current->data] = current;
+
+        current = current->next;
+    }
+
+    return pairs;
+}
+
+//Java -->
+
+
