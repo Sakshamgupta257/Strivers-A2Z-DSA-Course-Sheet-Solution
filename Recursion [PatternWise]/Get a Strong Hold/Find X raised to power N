@@ -1,0 +1,39 @@
+//C++ -->
+
+double myPow(double x, int n) {
+    if (n == 0) {
+        return 1.0;
+    } else if (n < 0) {
+        return 1.0 / myPow(x, -n);
+    } else {
+        double half_power = myPow(x, n / 2);
+        if (n % 2 == 0) {
+            return half_power * half_power;
+        } else {
+            return half_power * half_power * x;
+        }
+    }
+}
+
+//Java -->
+
+public class Solution {
+    public static double myPow(double x, int n) {
+        
+        if(n == 0){
+            return 1.0;
+        }
+
+        if(n < 0){
+            return 1/myPow(x, -n);
+        }
+
+        double ans = myPow(x, n/2);
+        if(n%2 == 0){
+            return ans * ans;
+        }
+        else{
+            return x * ans * ans;
+        }
+    }
+}
