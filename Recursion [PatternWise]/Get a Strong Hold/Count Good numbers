@@ -1,0 +1,54 @@
+//C++ -->
+
+bool isGood( int x, int D, int sum ){
+    if( x==0 )
+         return true;
+    int temp = x%10;// current digit
+    if( temp<=sum or temp==D )
+        return false;
+        
+    return isGood( x/10, D, sum+temp );
+}
+    
+vector<int> goodNumbers(int a, int b, int digit) {
+    vector<int> ans;
+    for( int i=a; i<=b; i++ ){
+        if( i%10==digit )   
+            continue;
+        if(isGood(i/10, digit, i%10))
+            ans.push_back( i );
+    }
+    return ans;
+}
+
+//Java -->
+
+import java.util.ArrayList;
+import java.util.List;
+    
+
+public class Solution {
+    public static boolean good( int x, int digi, int sum ){
+        if( x==0 )
+            return true;
+        int temp = x%10;// current digit
+        if( temp<=sum || temp==digi )
+            return false;
+        
+        return good( x/10, digi, sum+temp );
+    }
+
+    public static List< Integer > goodNumbers(int a, int b, int digit) {
+        List <Integer> ans = new ArrayList<>();
+
+        for(int i=a; i<=b; i++){
+            if(i%10 == digit){
+                continue;
+            }
+            if(good(i/10, digit, i%10)){
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
+}
