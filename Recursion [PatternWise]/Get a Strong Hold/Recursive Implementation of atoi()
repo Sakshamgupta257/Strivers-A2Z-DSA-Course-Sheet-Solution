@@ -1,0 +1,34 @@
+//C++ -->
+
+#include <bits/stdc++.h> 
+int atoiRecursive(string str, int index, int result) {
+    // Base case: If the index exceeds the string length, return the result.
+    if (index >= str.length()) {
+        return result;
+    }
+
+    // Check if the current character is a digit.
+    if (str[index] >= '0' && str[index] <= '9') {
+        // Convert the character to an integer and add it to the result.
+        int digit = str[index] - '0';
+        result = result * 10 + digit;
+    }
+
+    // Recursive call with the next index and the updated result.
+    return atoiRecursive(str, index + 1, result);
+}
+
+int atoi(string str) {
+    // Call the recursive helper function starting from index 0 and result 0.
+    int result = atoiRecursive(str, 0, 0);
+
+    // If the string has a negative sign, update the result to negative.
+    if (str[0] == '-') {
+        result *= -1;
+    }
+
+    return result;
+}
+
+//Java -->
+
